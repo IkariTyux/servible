@@ -1,0 +1,35 @@
+---
+
+- name: Configure sshd
+  copy:
+    src: config/sshd.conf
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart SSH
+
+- name: Configure bash
+  copy:
+    src: config/bashrc
+    dest: /etc/bash.bashrc
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Configure sudoers
+  copy:
+    src: config/sudoers
+    dest: /etc/sudoers.d/10-groups.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Configure wireguard
+  copy:
+    src: config/wireguard/
+    dest: /etc/wireguard
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Wireguard

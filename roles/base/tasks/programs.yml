@@ -1,0 +1,17 @@
+---
+
+- name: Update System
+  apt:
+    update_cache: true
+    upgrade: full
+
+- name: Install basic programs
+  apt:
+    name:
+      - git
+      - curl
+      - htop
+      - btop
+      - ca-certificates
+      - wireguard
+    state: present

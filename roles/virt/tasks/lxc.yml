@@ -1,0 +1,5 @@
+- name: Install LXC
+  apt:
+    name:
+      - lxc
+    state: present

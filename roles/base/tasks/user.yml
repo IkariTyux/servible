@@ -1,0 +1,32 @@
+---
+
+- name: Create groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - deploy
+    - passless
+    - sudo
+
+- name: Create main user
+  user:
+    name: "{{ local_user }}"
+    groups: "{{ item }}" 
+    append: yes
+  with_items:
+    - deploy
+    - sudo
+
+- name: Create ansible user
+  user:
+    name: ansible
+    groups: "{{ item }}"
+    append: yes
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_file: .ssh/id
+  with_items:
+    - deploy
+    - passless
+    - sudo

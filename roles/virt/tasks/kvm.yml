@@ -1,0 +1,11 @@
+
+- name: Install KVM
+  apt:
+    name:
+      - qemu-kvm
+      - libvirt-clients
+      - libvirt-daemon-system
+      - bridge-utils
+      - virtinst
+      - libvirt-daemon
+    state: present

@@ -1,0 +1,10 @@
+---
+
+- name: Create local user
+  include_tasks: user.yml
+
+- name: Install base programs
+  include_tasks: programs.yml
+
+- name: Deploy basic configuration
+  include_tasks: config.yml

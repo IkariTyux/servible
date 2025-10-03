@@ -1,0 +1,33 @@
+---
+
+- name: Install NAS utils
+  apt:
+    name:
+      - nfs-kernel-server
+      - rsync
+    state: present
+
+- name: Prepare mountpoints
+  file:
+    state: directory
+    path: /nas
+    owner: root
+    group: deploy
+    mode: "0774"
+
+- name: Mount main storage
+  mount:
+    path: /nas
+    src: UUID=797bd39b-c203-4683-bd9b-fbff58a2df18
+    fstype: ext4
+    state: mounted
+  notify: Reload Daemon
+
+- name: Copy Network shares config
+  copy:
+    src: nfs.conf
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart NFS

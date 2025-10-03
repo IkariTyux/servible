@@ -1,0 +1,10 @@
+---
+
+- name: Setup Docker
+  include_tasks: docker.yml
+
+#- name: Setup LXC
+#  include_tasks: lxc.yml
+#
+#- name: Setup KVM
+#  include_tasks: kvm.yml

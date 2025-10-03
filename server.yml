@@ -1,0 +1,9 @@
+---
+
+- name: Deploy Server
+  hosts: star-destroyer
+  become: yes
+  roles:
+    - base
+    - nas
+    - virt

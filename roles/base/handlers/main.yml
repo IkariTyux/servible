@@ -1,0 +1,16 @@
+- name: Restart SSH
+  systemd:
+    name: sshd
+    state: restarted
+
+- name: Restart NFS
+  systemd:
+    name: nfs-kernel-server
+    state: restarted
+
+- name: Restart Wireguard
+  shell: wg-quick down wg0 && wg-quick up wg0
+
+- name: Reload Daemon
+  systemd:
+    daemon_reload: true
