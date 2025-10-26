@@ -1,0 +1,20 @@
+services:
+  actual_server:
+    image: docker.io/actualbudget/actual-server:latest
+    ports:
+      - '5006:80'
+    environment:
+      #- ACTUAL_HTTPS_KEY=/data/certs/cert.key
+      #- ACTUAL_HTTPS_CERT=/data/certs/cert.crt
+      - ACTUAL_PORT=80
+    volumes:
+      - ./data:/data
+    networks:
+      main:
+        ipv4_address: 172.16.90.1
+    restart: always
+
+networks:
+  main:
+    name: main
+    external: true

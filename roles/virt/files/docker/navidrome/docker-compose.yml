@@ -1,0 +1,17 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    ports:
+      - "4533:4533"
+    restart: always
+    networks:
+      main:
+        ipv4_address: 172.16.90.2
+    volumes:
+      - "./data:/data"
+      - "/nas/multimedia/Music:/music:ro"
+
+networks:
+  main:
+    name: main
+    external: true

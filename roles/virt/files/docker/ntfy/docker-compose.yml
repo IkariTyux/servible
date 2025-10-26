@@ -1,0 +1,22 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ="Europe/Paris"
+    networks:
+      main:
+        ipv4_address: 172.16.90.3
+    volumes:
+      - /var/cachentfy:/var/cache/ntfy
+      - /etc/ntfy:/etc/ntfy
+    ports:
+      - 8080:80
+    restart: always
+
+networks:
+  main:
+    name: main
+    external: true
