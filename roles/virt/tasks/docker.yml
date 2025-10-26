@@ -10,3 +10,44 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: present
+
+- name: Add deploy group to socket
+  lineinfile:
+    path: /usr/lib/systemd/system/docker.socket
+    regexp: '^SocketGroup='
+    line: SocketGroup=deploy
+  notify:
+    - Reload Daemon
+    - Restart docker
+
+- name: Create main network
+  community.docker.docker_network:
+    name: main
+    ipam_config:
+      - subnet: 172.16.90.0/24
+        gateway: 172.16.90.254
+
+- name: Create testing network
+  community.docker.docker_network:
+    name: testing
+    ipam_config:
+      - subnet: 172.16.10.0/24
+        gateway: 172.16.10.254
+
+- name: Copy main containers
+  copy:
+    src: docker/
+    dest: /nas/docker
+    owner: root
+    group: deploy
+    mode: "0774"
+
+- name: Deploy main containers
+  community.docker.docker_compose_v2:
+    project_src: /nas/docker/{{ item }}
+    state: present
+  with_items:
+    - actual
+    - navidrome
+    - ntfy
+    - jellyfin
