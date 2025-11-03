@@ -13,7 +13,7 @@ services:
       - ./config:/config
       - /nas/multimedia/cache:/cache
       - type: bind
-        source: /nas/multimedia/Movies 
+        source: /nas/multimedia
         target: /media
     restart: 'always'
 
