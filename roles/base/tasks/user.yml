@@ -7,12 +7,12 @@
   with_items:
     - deploy
     - passless
-    - sudo
 
 - name: Create main user
   user:
     name: "{{ local_user }}"
     groups: "{{ item }}" 
+    password: "{{ local_user_password }}"
     append: yes
   with_items:
     - deploy
@@ -29,4 +29,3 @@
   with_items:
     - deploy
     - passless
-    - sudo
