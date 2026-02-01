@@ -11,7 +11,7 @@
       - git
       - curl
       - htop
-      - btop
       - ca-certificates
       - wireguard
+      - iptables-persistant
     state: present
