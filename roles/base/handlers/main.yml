@@ -8,8 +8,8 @@
     name: nfs-kernel-server
     state: restarted
 
-- name: Restart Wireguard
-  shell: wg-quick down wg0 && wg-quick up wg0
+- name: restart wireguard
+  shell: wg-quick down /etc/wireguard/wg0.conf && wg-quick up /etc/wireguard/wg0.conf
 
 - name: Reload Daemon
   systemd:

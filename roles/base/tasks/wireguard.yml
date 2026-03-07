@@ -1,0 +1,28 @@
+---
+
+- name: Copy config template
+  copy:
+    src: config/wireguard
+    dest: /etc/wireguard/wg0.conf
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Generate keys
+  script: scripts/wg-keygen.sh
+
+- name: Get Privatekey
+  shell: cat /etc/wireguard/privatekey 2> /dev/null
+  register: wg_priv
+
+- name: Fill config file
+  lineinfile:
+    path: /etc/wireguard/wg0.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^PrivateKey =', line: "PrivateKey = {{ wg_priv.stdout }}" }
+    - { regexp: '^Address =', line: "Address = {{ wg_address }}" }
+    - { regexp: '^PublicKey =', line: "PublicKey = {{ wg_publickey }}" }
+    - { regexp: '^Endpoint =', line: "Endpoint = {{ wg_server }}:{{ wg_port }}" }
+    - { regexp: '^AllowedIPs =', line: "AllowedIPs = {{ wg_ips }}" }

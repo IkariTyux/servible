@@ -12,7 +12,7 @@
   user:
     name: "{{ local_user }}"
     groups: "{{ item }}" 
-    password: "{{ local_user_password }}"
+    shell: "/bin/bash"
     append: yes
   with_items:
     - deploy

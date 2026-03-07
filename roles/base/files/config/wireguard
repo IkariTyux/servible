@@ -1,0 +1,9 @@
+[Interface]
+PrivateKey = 
+Address = 
+
+[Peer]
+PublicKey = 
+Endpoint = 
+AllowedIPs = 
+PersistentKeepAlive = 25

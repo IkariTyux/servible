@@ -25,11 +25,5 @@
     group: root
     mode: "0644"
 
-- name: Configure wireguard
-  copy:
-    src: config/wireguard/
-    dest: /etc/wireguard
-    owner: root
-    group: root
-    mode: "0644"
-  notify: Restart Wireguard
+- name: Configure Wireguard
+  include_tasks: wireguard.yml

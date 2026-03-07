@@ -13,5 +13,4 @@
       - htop
       - ca-certificates
       - wireguard
-      - iptables-persistant
     state: present
