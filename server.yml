@@ -1,9 +1,7 @@
 ---
 
 - name: Deploy Server
-  hosts: star-destroyer
+  hosts: vps
   become: yes
   roles:
-    - base
-    - nas
-    - virt
+    - cloud
